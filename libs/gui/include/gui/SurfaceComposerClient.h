@@ -444,6 +444,10 @@ public:
 
     static sp<IBinder> getPhysicalDisplayToken(PhysicalDisplayId displayId);
 
+    // [cannon][A17] ABI 兼容：A12 的 prebuilt libem_support_jni.so（EngineerMode）
+    // 仍引用 A17 已删除的 getInternalDisplayToken()。内部屏是第一个 physical display。
+    static sp<IBinder> getInternalDisplayToken();
+
     // Returns StalledTransactionInfo if a transaction from the provided pid has not been applied
     // due to an unsignaled fence.
     static std::optional<gui::StalledTransactionInfo> getStalledTransactionInfo(pid_t pid);

@@ -1302,6 +1302,14 @@ sp<IBinder> SurfaceComposerClient::getPhysicalDisplayToken(PhysicalDisplayId dis
     return status.isOk() ? display : nullptr;
 }
 
+sp<IBinder> SurfaceComposerClient::getInternalDisplayToken() {
+    const std::vector<PhysicalDisplayId> displayIds = getPhysicalDisplayIds();
+    if (displayIds.empty()) {
+        return nullptr;
+    }
+    return getPhysicalDisplayToken(displayIds[0]);
+}
+
 std::optional<gui::StalledTransactionInfo> SurfaceComposerClient::getStalledTransactionInfo(
         pid_t pid) {
     std::optional<gui::StalledTransactionInfo> result;
